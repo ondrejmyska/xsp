@@ -270,10 +270,12 @@ namespace Mono.WebServer
 			try {
 				string line;
 				headers = new Hashtable (StringComparer.InvariantCultureIgnoreCase);
-				while ((line = ReadLine ()) != null && line.Length > 0) {
+				while ((line = ReadLine ()) != null && line.Length > 0)
+				{
+				    Console.WriteLine(String.Format("Header line: {0}", line));
 					int colon = line.IndexOf (':');
 					if (colon == -1 || line.Length < colon + 2)
-						throw new Exception ();
+						throw new Exception (String.Format("Cannot parse header: {0}", line));
 					string key = line.Substring (0, colon);
 					string value = line.Substring (colon + 1).Trim ();
 					headers [key] = value;
